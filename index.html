@@ -1,0 +1,261 @@
+<html>
+<head>
+<meta name="author" content="Sumit Sagar">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+.deck {	
+    width: 100%;   
+    text-align: center;
+    color: white;
+    display: inline-block;	
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.card {    
+    border: solid 1px #808080;
+    background-color: white;
+    display: inline-block;
+    border-radius: 10px;
+    font-size: 36pt;    
+    color: black;    
+}
+
+.btn {
+    float: right;    
+    border-radius: 30px;
+    margin: 10px;    
+    border-radius: 12px;
+}
+
+.btncls {    
+    background: #72c3dc;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px;
+    color: #FFFFFF;
+	cursor: pointer;
+	outline: none;
+    border-color: #72c3dc;
+    box-shadow: 0px 5px #2B8EAD;
+}
+.btncls:hover {
+	padding: 11px 21px;
+	background-color: #5eb6d1;;
+}
+.col-3{
+	float: right;
+	width:18%;
+}
+.col-9{
+	width:75%;
+	float:left
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+h5{
+	font-size: 1.25rem;
+    margin-bottom: .5rem;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    color: inherit;
+	margin-top: 0;
+}
+.row{   
+    flex-wrap: wrap;   
+	}
+
+.box { 
+  display: inline-block;  
+}
+.fotter{
+    padding-top: 470px;
+	color: black;
+    font-size: 14px;
+	}
+
+@media (min-width: 992px){
+.container {
+    max-width: 1020px;
+	padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.deck {
+	font-size: 36pt; 
+	background: #EFEFEF;     
+    border-top: solid 3px #B0B1B2;     
+}
+.row{
+	margin-right: -15px;
+    margin-left: -15px;
+}
+.btncls {
+    width: 150px;
+	}
+.btn {
+    padding: 10px 20px;    
+}
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 50px 0px;
+}
+.card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding-left: .96rem ;	
+}
+.fotter{    
+	padding-bottom: 30px;
+	}
+}
+
+@media only screen and (max-width: 376px){
+.container {
+    max-width: 350px;
+	background: #000000;
+	color: white;	 
+    padding-left: 28px;
+	padding-bottom: 13px;
+}
+.deck {
+	font-size: 14pt;
+    background: #ffffff;
+    border: solid 1px #ffffff; 
+	color: black     
+}
+.textstyl{
+    font-size: 24px;
+    padding: 15px 0px;
+	margin-right: 15px;
+    margin-left: -14px;
+	background: #576468;
+}
+.col-3{
+	align: center;
+	width:100%;
+}
+.col-9{
+	width:100%;
+	float:center
+}
+.row{   
+    flex-wrap: wrap;
+    margin-left: -15px;
+	}
+.column {    
+    width: 100%; 
+	margin: 2px;
+}
+.colStyl{
+	background: #EFEFEF !important;   
+	}
+.card-body {    
+    padding: .96rem ;
+	margin-left: 15px;	
+}
+.pad{
+padding-top: 15px;
+}
+}
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="pad">
+    <h5 class="textstyl text-center"> Shuffle and Sort</h5>
+	</div>
+    <div class="row deck">
+        <div class="col-3 btn">
+           
+                <button class="btncls" onclick="shuffle();">Suffle</button>
+            
+                <button class="btncls" onclick="rearrange();">Re Arrenge</button>
+            
+        </div>
+        <div class="col-9">
+            <div class="row">
+                <div id="column" >
+                    <div class="colum card-body" id= "ele"></div>					
+                </div>
+            </div>
+        </div>
+		<div class="fotter">
+		<p> Shuffle and sort by Sumit Sagar</p>
+		</div>
+		
+    </div>
+</div>
+</body>
+
+<script>
+
+window.addEventListener('DOMContentLoaded', function() {
+  this.shuffle();
+}, true);
+
+  var arr = [1,2,3,4,5,6,7,8,9];
+  var colors = [['#6F98A8', '#2B8EAD', '#2F454E','#2B8EAD', '#2F454E', '#BFBFBF', '#BFBFBF', '#6F98A8','#2F454E'],
+  ['#6F98A8', '#2B8EAD', '#2F454E','#2B8EAD', '#2F454E', '#BFBFBF', '#BFBFBF', '#6F98A8','#2F454E'],
+  ['#6F98A8', '#2B8EAD', '#2F454E','#2B8EAD', '#2F454E', '#BFBFBF', '#BFBFBF', '#6F98A8','#2F454E']
+  ];
+  var text = '';
+  
+  function shuffle(){  
+   var array = this.arr;
+   text = '';
+   var currentIndex = array.length, temporaryValue, randomIndex;
+      if (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;    
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+      this.arr = array;
+		
+	  for(i = 0; i < this.arr.length; i++){
+		text = text + '<div class="column box" id="column"> <div class="colum card-body colStyl" id="item">'+ this.arr[i] +'</div> </div>'			
+		}		
+	  document.getElementById("ele").innerHTML = text;
+	  this.colorChange();
+	 }
+	
+   function rearrange(){
+   text = '';
+      this.arr.sort();
+	   for(i = 0; i < this.arr.length; i++){
+		text = text + '<div class="column box" id="column"> <div class="colum card-body" id="item">'+ this.arr[i] +'</div> </div>'			
+		}		
+	  document.getElementById("ele").innerHTML = text;
+	  this.colorChange();
+    }
+	
+	window.onload = function() {
+	  this.colorChange();
+	};
+	
+
+function colorChange() {
+var boxed = document.querySelectorAll(".box");
+    let colorIndex = Math.floor(Math.random() * 3);
+   for (i = 0; i < boxed.length; i++) {
+         
+        boxed[i].style.backgroundColor = colors[colorIndex][i];        
+        boxed[i].style.display = 'inline-block';
+  }
+}
+
+</script>
+</html>
